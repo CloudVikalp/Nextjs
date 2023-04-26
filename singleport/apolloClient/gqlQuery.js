@@ -13,6 +13,17 @@ query {
   }
 }
 `
+export const searchProduct =gql`
+query Query($where: ProductWhereInput!) {
+  products(where: { price: { equals: $price  } }) {
+    price
+    name
+    id
+  }
+}
+`
+
+
 export const getProduct = gql`
 query product($id: ID!) {
   product(where: { id: $id }) {

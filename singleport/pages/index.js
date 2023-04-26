@@ -2,10 +2,11 @@ import Head from 'next/head';
 import Link from "next/link";
 import styles from '../styles/Home.module.css';
 import client from "../apolloClient";
-import { getProducts, getCarts, createCart } from '../apolloClient/gqlQuery';
+import { getProducts, getCarts, createCart, searchProduct } from '../apolloClient/gqlQuery';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-nextjs-toast'
 import { useRouter } from 'next/router';
+import { useQuery } from '@apollo/client';
 
 
 export default function Home({ products }) {
@@ -46,6 +47,18 @@ export default function Home({ products }) {
     }
   };
 
+  const Saerch= async()=>{
+    try{
+      const {  data } = useQuery(searchProduct, {
+        query: 150,
+    })
+    console.log(data)
+  }
+    catch(e){
+   console.log(e)
+    }
+  }
+
   const AllCarts = async () => {
     try {
       const { data } = await client.query({
@@ -64,6 +77,7 @@ export default function Home({ products }) {
 
   useEffect(() => {
     AllCarts();
+    Saerch()
   }, []);
 
   return (
@@ -94,6 +108,10 @@ export default function Home({ products }) {
         <h5 className={`${styles.title} py-16`}>
           <a className='block pb-2'>Products</a>
         </h5>
+        <div className={`flex`}>
+        <input/>
+        <button>search with name</button>
+        </div>
 
         <div className={styles.grid}>
           {
