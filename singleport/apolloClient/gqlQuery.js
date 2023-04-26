@@ -14,11 +14,11 @@ query {
 }
 `
 export const searchProduct =gql`
-query Query($where: ProductWhereInput!) {
-  products(where: { price: { equals: $price  } }) {
-    price
-    name
+query product($name: String!) {
+  product(where: { price: { equals:$name  } }) {
     id
+   name
+   price
   }
 }
 `

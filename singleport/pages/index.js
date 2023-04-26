@@ -46,18 +46,30 @@ export default function Home({ products }) {
       
     }
   };
+  const Saerch= ()=>{
+    
+    const {  data } = useQuery(searchProduct, {
+      variables: "top2" ,
+    });
+    console.log('search'+data)
 
-  const Saerch= async()=>{
+}
+
+  const searchClient= async()=>{
     try{
-      const {  data } = useQuery(searchProduct, {
-        query: 150,
-    })
-    console.log(data)
-  }
+      const { data } = await client.query({
+        query: Saerch,
+      });
+      console.log(data)
+    }
     catch(e){
    console.log(e)
     }
   }
+//   searchClient()
+
+
+ 
 
   const AllCarts = async () => {
     try {
@@ -74,10 +86,10 @@ export default function Home({ products }) {
       })
     }
   };
-
+  
   useEffect(() => {
     AllCarts();
-    Saerch()
+   
   }, []);
 
   return (
